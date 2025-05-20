@@ -26,3 +26,31 @@ public:
         return result;
     }
 };
+
+
+// 非recursion写法，用stack
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        
+        stack<TreeNode*> st;
+        vector<int> result;
+
+        if (root == nullptr) return result;
+
+        st.push(root);
+        while (!st.empty()) {
+            TreeNode* node = st.top();
+            st.pop();
+
+            if (node != nullptr) result.push_back(node->val);
+            else continue;
+
+            st.push(node->left);
+            st.push(node->right);
+        }
+
+        reverse(result.begin(), result.end());
+        return result;
+    }
+};
