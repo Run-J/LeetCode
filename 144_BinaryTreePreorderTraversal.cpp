@@ -44,3 +44,32 @@ public:
     }
 
 };
+
+
+// 非递归写法，用栈
+class Solution {
+public:
+
+    vector<int> preorderTraversal(TreeNode* root) {
+
+        stack<TreeNode*> st;
+        vector<int> result;
+
+        if (root == NULL) return result;
+        st.push(root);
+        while (!st.empty()) {
+            TreeNode* node = st.top();
+            st.pop();
+
+            if (node != NULL) result.push_back(node->val);
+            else continue;
+
+            st.push(node->right);
+            st.push(node->left);
+        }
+
+        return result;
+
+    }
+
+};
